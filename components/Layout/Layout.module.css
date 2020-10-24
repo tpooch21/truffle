@@ -1,0 +1,14 @@
+.Layout {
+  max-width: 44rem;
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  margin-bottom: 3rem;
+  height: auto;
+}
