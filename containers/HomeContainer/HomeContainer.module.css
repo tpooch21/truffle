@@ -1,0 +1,11 @@
+.HomeContainer {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.HomeContainer span {
+  font-family: "Satisfy", cursive;
+  text-shadow: 1px 1px #6d0ff9;
+}

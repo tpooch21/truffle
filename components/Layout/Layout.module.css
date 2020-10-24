@@ -1,14 +1,27 @@
 .Layout {
   max-width: 44rem;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  font-family: inherit;
+}
+
+.Layout h1 {
+  font-family: inherit;
 }
 
 .header {
   width: 100%;
-  margin-bottom: 3rem;
   height: auto;
+}
+
+.main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
