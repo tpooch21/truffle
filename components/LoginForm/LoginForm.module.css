@@ -5,13 +5,25 @@
   border-radius: 5px;
   display: flex;
   flex-flow: column;
-  height: 16rem;
+  height: 24rem;
   border: 2px solid black;
   margin-top: 2rem;
+  align-items: center;
+}
+
+.LoginForm h3 {
+  color: #6d0ff9;
+}
+
+.formBody {
+  display: flex;
+  flex-flow: column;
+  width: 85%;
 }
 
 .inputLabel {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 700;
   width: 50%;
   margin: 20px auto 0;
 }
@@ -28,7 +40,7 @@
 .submit {
   width: 30%;
   height: 30px;
-  margin: 10px auto;
+  margin: 25px auto;
   background: #6d0ff9;
   color: white;
   border: none;
@@ -38,4 +50,15 @@
 }
 
 .submit:hover {
+  background: #aa73fd;
+}
+
+.signUp {
+  width: 25%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  font-size: 0.9em;
 }
