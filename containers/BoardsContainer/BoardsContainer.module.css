@@ -1,5 +1,9 @@
 .BoardsContainer {
-  width: 32rem;
+  width: 52rem;
   align-items: center;
   margin-top: 20px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }

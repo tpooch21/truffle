@@ -7,5 +7,5 @@
 
 .HomeContainer span {
   font-family: "Satisfy", cursive;
-  text-shadow: 1px 1px #6d0ff9;
+  text-shadow: 1px 1px var(--main-purple);
 }

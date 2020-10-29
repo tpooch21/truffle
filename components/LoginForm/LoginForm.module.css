@@ -1,6 +1,6 @@
 .LoginForm {
   width: 36rem;
-  background: #edebf0;
+  background: var(--main-gray);
   box-shadow: 2px 2px #bbb;
   border-radius: 5px;
   display: flex;
@@ -12,7 +12,7 @@
 }
 
 .LoginForm h3 {
-  color: #6d0ff9;
+  color: var(--main-purple);
 }
 
 .formBody {
@@ -41,7 +41,7 @@
   width: 30%;
   height: 30px;
   margin: 25px auto;
-  background: #6d0ff9;
+  background: var(--main-purple);
   color: white;
   border: none;
   border-radius: 3px;
@@ -50,7 +50,7 @@
 }
 
 .submit:hover {
-  background: #aa73fd;
+  background: var(--main-purple-light);
 }
 
 .signUp {

@@ -1,0 +1,9 @@
+.GroupList {
+  flex: 3 1 0;
+  border: 1px solid black;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--main-gray);
+}

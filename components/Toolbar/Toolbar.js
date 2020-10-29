@@ -15,7 +15,7 @@ const Toolbar = () => (
         </a>
       </Link>
     </div>
-    <h2>Truffle Butter</h2>
+    <h2>Truffle</h2>
     <div className={styles.logo}></div>
   </div>
 );

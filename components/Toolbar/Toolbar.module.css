@@ -4,8 +4,8 @@
   top: 0;
   left: 0;
   height: 50px;
-  background: #6d0ff9;
-  color: #f1ebe4;
+  background: var(--main-purple);
+  color: var(--main-cream);
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   display: flex;

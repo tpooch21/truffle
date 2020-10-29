@@ -4,7 +4,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 const HomeContainer = () => (
   <div className={styles.HomeContainer}>
     <h1>
-      Welcome to <span>Truffle Butter</span>
+      Welcome to <span>Truffle</span>
     </h1>
     <LoginForm />
   </div>
