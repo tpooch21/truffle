@@ -8,8 +8,8 @@ const BoardList = ({ boards }) => (
     </header>
     <hr />
     <section className={styles.BoardList__grid}>
-      {boards.map(({ title }) => (
-        <BoardItem title={title} />
+      {boards.map(({ title, image }) => (
+        <BoardItem title={title} image={image} />
       ))}
     </section>
   </section>

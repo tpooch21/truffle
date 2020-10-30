@@ -5,9 +5,17 @@ import BoardList from "../../components/BoardList/BoardList";
 import GroupList from "../../components/GroupList/GroupList";
 
 const boardList = [
-  { group: "2InfinityAndBeyond", title: "Trevor's Module" },
-  { group: "Job Search", title: "Get me a Job" },
-  { group: "Muggles", title: "Harry Potter Marathon Tracker" },
+  {
+    group: "2InfinityAndBeyond",
+    title: "Trevor's Module",
+    image: "/mountain.jpg",
+  },
+  { group: "Job Search", title: "Get me a Job", image: "/beach.jpg" },
+  {
+    group: "Muggles",
+    title: "Harry Potter Marathon Tracker",
+    image: "/forest.jpg",
+  },
 ];
 
 const BoardsContainer = () => {
