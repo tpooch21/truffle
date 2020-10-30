@@ -1,8 +1,24 @@
 .BoardList {
-  flex: 7 1 0;
-  border: 1px solid black;
+  flex: 8 1 0;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+.BoardList__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 1rem;
+  width: 100%;
+}
+
+.BoardList__header {
+  padding: 0 10px 5px;
+}
+
+.BoardList hr {
+  border-top: 2px solid var(--main-purple-light);
+  width: 100%;
 }

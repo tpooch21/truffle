@@ -1,12 +1,13 @@
 import styles from "./GroupList.module.css";
+import GroupItem from "./GroupItem/GroupItem";
 
 const GroupList = ({ boards }) => (
   <section className={styles.GroupList}>
     <header>
-      <h3>Groups</h3>
+      <h4>Groups</h4>
     </header>
     {boards.map(({ group }) => (
-      <p>{group}</p>
+      <GroupItem name={group} />
     ))}
   </section>
 );

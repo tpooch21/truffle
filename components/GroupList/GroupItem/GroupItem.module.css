@@ -1,0 +1,15 @@
+.GroupButton {
+  width: 80%;
+  background: var(--main-purple-light);
+  color: var(--main-cream);
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  line-height: 2rem;
+}
+
+.GroupButton:hover {
+  background: var(--main-purple-med);
+}

@@ -3,12 +3,15 @@ import BoardItem from "./BoardItem/BoardItem";
 
 const BoardList = ({ boards }) => (
   <section className={styles.BoardList}>
-    <header>
+    <header className={styles.BoardList__header}>
       <h3>Group X Boards</h3>
     </header>
-    {boards.map(({ title }) => (
-      <BoardItem title={title} />
-    ))}
+    <hr />
+    <section className={styles.BoardList__grid}>
+      {boards.map(({ title }) => (
+        <BoardItem title={title} />
+      ))}
+    </section>
   </section>
 );
 

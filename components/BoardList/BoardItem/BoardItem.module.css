@@ -1,0 +1,12 @@
+.BoardItem {
+  line-height: 5.4rem;
+  cursor: pointer;
+  background: black;
+  color: var(--main-cream);
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  max-height: 5.4rem;
+}
