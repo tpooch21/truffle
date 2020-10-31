@@ -3,36 +3,7 @@ import Link from "next/link";
 import styles from "./BoardsContainer.module.css";
 import BoardList from "../../components/BoardList/BoardList";
 import GroupList from "../../components/GroupList/GroupList";
-
-const boardList = [
-  {
-    group: "2InfinityAndBeyond",
-    boards: [
-      {
-        title: "Trevor's Module",
-        image: "/mountain.jpg",
-      },
-    ],
-  },
-  {
-    group: "Job Search",
-    boards: [
-      {
-        title: "Get me a Job",
-        image: "/beach.jpg",
-      },
-    ],
-  },
-  {
-    group: "Muggles",
-    boards: [
-      {
-        title: "Harry Potter Marathon Tracker",
-        image: "/forest.jpg",
-      },
-    ],
-  },
-];
+import { boardList } from "../../data/boardData";
 
 const BoardsContainer = () => {
   const [boards, addBoard] = useState(boardList);
