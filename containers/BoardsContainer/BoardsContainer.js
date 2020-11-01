@@ -5,7 +5,7 @@ import BoardList from "../../components/BoardList/BoardList";
 import GroupList from "../../components/GroupList/GroupList";
 import { boardList } from "../../data/boardData";
 
-const BoardsContainer = () => {
+const BoardsContainer = ({ groups }) => {
   const [boards, addBoard] = useState(boardList);
   const [currentGroup, updateCurrentGroup] = useState(boardList[0]);
 
@@ -16,7 +16,7 @@ const BoardsContainer = () => {
 
   return (
     <div className={styles.BoardsContainer}>
-      <GroupList boards={boards} handleGroupSelect={filterBoardsByGroup} />
+      <GroupList groups={groups} handleGroupSelect={filterBoardsByGroup} />
       <BoardList group={currentGroup.group} boards={currentGroup.boards} />
     </div>
   );
