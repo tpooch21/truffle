@@ -2,26 +2,28 @@ import BoardsContainer from "../../containers/BoardsContainer/BoardsContainer";
 import Layout from "../../components/Layout/Layout";
 import fire from "../../firebaseConfig";
 
-const BoardsPage = ({ groupNames }) => (
+const BoardsPage = ({ groups }) => (
   <Layout>
-    <BoardsContainer groups={groupNames} />
+    <BoardsContainer groups={groups} />
   </Layout>
 );
 
 export async function getStaticProps(context) {
   let groupObj;
-  await fire
-    .database()
-    .ref("/groups/")
-    .once("value")
-    .then((snap) => {
-      groupObj = snap.val();
-    });
+  const groupsRef = fire.database().ref("groups");
+  await groupsRef.once("value").then((snap) => {
+    groupObj = snap.val();
+  });
 
-  const groupNames = Object.keys(groupObj);
+  const groups = Object.keys(groupObj).map((key) => ({
+    name: groupObj[key].name,
+    boards: groupObj[key].boards,
+  }));
+
+  console.log(groups);
   return {
     props: {
-      groupNames,
+      groups,
     },
   };
 }

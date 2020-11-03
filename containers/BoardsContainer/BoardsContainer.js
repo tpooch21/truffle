@@ -6,18 +6,18 @@ import GroupList from "../../components/GroupList/GroupList";
 import { boardList } from "../../data/boardData";
 
 const BoardsContainer = ({ groups }) => {
-  const [boards, addBoard] = useState(boardList);
-  const [currentGroup, updateCurrentGroup] = useState(boardList[0]);
+  const [groupList, addGroup] = useState(groups);
+  const [currentGroup, updateCurrentGroup] = useState(groups[0]);
 
   const filterBoardsByGroup = (groupName) => {
-    const groupIdx = boards.findIndex(({ group }) => group === groupName);
-    updateCurrentGroup(boards[groupIdx]);
+    const currIdx = groupList.findIndex((group) => group.name === groupName);
+    updateCurrentGroup(groupList[currIdx]);
   };
 
   return (
     <div className={styles.BoardsContainer}>
       <GroupList groups={groups} handleGroupSelect={filterBoardsByGroup} />
-      <BoardList group={currentGroup.group} boards={currentGroup.boards} />
+      <BoardList group={currentGroup.name} boards={currentGroup.boards} />
     </div>
   );
 };

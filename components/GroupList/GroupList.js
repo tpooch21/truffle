@@ -8,9 +8,9 @@ const GroupList = ({ groups, handleGroupSelect }) => (
     </header>
     {groups.map((group) => (
       <GroupItem
-        key={group}
-        name={group}
-        onClick={() => handleGroupSelect(group)}
+        key={group.name}
+        name={group.name}
+        onClick={() => handleGroupSelect(group.name)}
       />
     ))}
   </section>
