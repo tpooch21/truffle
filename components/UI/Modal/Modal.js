@@ -1,10 +1,10 @@
 import styles from "./Modal.module.css";
 import Backdrop from "../Backdrop/Backdrop";
 
-const Modal = ({ show, children }) => {
+const Modal = ({ show, close, children }) => {
   return show ? (
     <>
-      <Backdrop />
+      <Backdrop close={close} />
       <section className={styles.Modal}>{children}</section>
     </>
   ) : null;

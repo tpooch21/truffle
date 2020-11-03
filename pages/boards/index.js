@@ -16,11 +16,11 @@ export async function getStaticProps(context) {
   });
 
   const groups = Object.keys(groupObj).map((key) => ({
+    key: key,
     name: groupObj[key].name,
     boards: groupObj[key].boards,
   }));
 
-  console.log(groups);
   return {
     props: {
       groups,

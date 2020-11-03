@@ -2,7 +2,7 @@ import styles from "./BoardList.module.css";
 import BoardItem from "./BoardItem/BoardItem";
 import AddBoardItem from "./BoardItem/AddBoardItem";
 
-const BoardList = ({ group, boards }) => {
+const BoardList = ({ group, boards, open }) => {
   const boardsList = Object.keys(boards);
 
   return (
@@ -15,7 +15,7 @@ const BoardList = ({ group, boards }) => {
         {boardsList.map((board) => (
           <BoardItem key={board} title={board} />
         ))}
-        <AddBoardItem />
+        <AddBoardItem add={open} />
       </section>
     </section>
   );

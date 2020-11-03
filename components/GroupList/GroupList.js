@@ -8,7 +8,7 @@ const GroupList = ({ groups, handleGroupSelect }) => (
     </header>
     {groups.map((group) => (
       <GroupItem
-        key={group.name}
+        key={group.key}
         name={group.name}
         onClick={() => handleGroupSelect(group.name)}
       />
