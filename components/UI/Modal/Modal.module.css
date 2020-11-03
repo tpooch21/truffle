@@ -1,0 +1,15 @@
+.Modal {
+  position: fixed;
+  margin: auto;
+  top: 12rem;
+  width: 44rem;
+  height: 16rem;
+  color: black;
+  background: white;
+  border-radius: 5px;
+  z-index: 12;
+}
+
+.Modal__header {
+  text-align: center;
+}
