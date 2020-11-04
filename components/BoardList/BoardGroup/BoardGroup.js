@@ -2,10 +2,13 @@ import BoardItem from "../BoardItem/BoardItem";
 import styles from "./BoardGroup.module.css";
 import AddBoardItem from "../BoardItem/AddBoardItem";
 
-const BoardGroup = ({ groupName, boards, open }) => {
+const BoardGroup = ({ groupName, boards, open, id }) => {
   const boardsList = boards
     ? Object.keys(boards).map((board) => {
-        return boards[board].name;
+        return {
+          ...boards[board],
+          key: board,
+        };
       })
     : null;
 
@@ -17,7 +20,9 @@ const BoardGroup = ({ groupName, boards, open }) => {
       <hr />
       <section className={styles.BoardGroup__grid}>
         {boardsList &&
-          boardsList.map((board) => <BoardItem key={board} title={board} />)}
+          boardsList.map(({ name, key }) => (
+            <BoardItem key={key} title={name} />
+          ))}
         <AddBoardItem add={open} />
       </section>
     </section>

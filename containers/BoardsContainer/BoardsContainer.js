@@ -12,10 +12,18 @@ import { formatJSON } from "../../helpers/formatFirebaseData";
 const BoardsContainer = ({ groups }) => {
   const [groupList, updateGroupList] = useState(groups);
   const [addBoardSelected, toggleAddBoardSelected] = useState(false);
+  const [currentGroup, selectCurrentGroup] = useState(null);
   const [addBoardInput, updateAddBoardInput] = useState("");
 
-  const toggleModalDisplay = (val) => {
+  const toggleModalDisplay = (val, groupName) => {
+    // If modal is being closed, no need to search for selected group, and currentGroup is set to null
+    const groupIdx = groupName
+      ? groupList.findIndex((group) => group.name === groupName)
+      : null;
+    const group = groupIdx !== null ? groupList[groupIdx] : null;
+
     toggleAddBoardSelected(val);
+    selectCurrentGroup(group);
   };
 
   const handleUserInput = (e) => {
@@ -48,6 +56,8 @@ const BoardsContainer = ({ groups }) => {
     allGroupsRef.on("value", (snap) => {
       console.log("Is this running? ");
       const mappedGroups = formatJSON(snap.val());
+
+      // update groupList to display newly-added board following state update
       updateGroupList(mappedGroups);
     });
 
@@ -56,7 +66,14 @@ const BoardsContainer = ({ groups }) => {
 
   return (
     <>
-      <Modal show={addBoardSelected} close={() => toggleModalDisplay(false)}>
+      <Modal
+        show={addBoardSelected}
+        close={() => toggleModalDisplay(false, null)}
+        currentGroup={currentGroup}
+      >
+        <header>
+          <h2>Add Board to {currentGroup ? currentGroup.name : ""}</h2>
+        </header>
         <AddBoardForm
           input={addBoardInput}
           onUserInput={handleUserInput}
@@ -65,7 +82,7 @@ const BoardsContainer = ({ groups }) => {
       </Modal>
       <div className={styles.BoardsContainer}>
         <GroupList groups={groupList} />
-        <BoardList groups={groupList} open={() => toggleModalDisplay(true)} />
+        <BoardList groups={groupList} open={toggleModalDisplay} />
       </div>
     </>
   );

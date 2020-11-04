@@ -5,7 +5,13 @@ const BoardList = ({ groups, open }) => {
   return (
     <div className={styles.BoardList}>
       {groups.map(({ key, name, boards }) => (
-        <BoardGroup key={key} groupName={name} boards={boards} open={open} />
+        <BoardGroup
+          key={key}
+          groupName={name}
+          boards={boards}
+          open={() => open(true, name)}
+          id={key}
+        />
       ))}
     </div>
   );
