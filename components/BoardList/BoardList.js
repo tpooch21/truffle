@@ -1,23 +1,13 @@
 import styles from "./BoardList.module.css";
-import BoardItem from "./BoardItem/BoardItem";
-import AddBoardItem from "./BoardItem/AddBoardItem";
+import BoardGroup from "./BoardGroup/BoardGroup";
 
-const BoardList = ({ group, boards, open }) => {
-  const boardsList = Object.keys(boards);
-
+const BoardList = ({ groups, open }) => {
   return (
-    <section className={styles.BoardList}>
-      <header className={styles.BoardList__header}>
-        <h3>{group} Boards</h3>
-      </header>
-      <hr />
-      <section className={styles.BoardList__grid}>
-        {boardsList.map((board) => (
-          <BoardItem key={board} title={board} />
-        ))}
-        <AddBoardItem add={open} />
-      </section>
-    </section>
+    <div className={styles.BoardList}>
+      {groups.map(({ key, name, boards }) => (
+        <BoardGroup key={key} groupName={name} boards={boards} open={open} />
+      ))}
+    </div>
   );
 };
 

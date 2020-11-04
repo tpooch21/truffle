@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./BoardsContainer.module.css";
 import BoardList from "../../components/BoardList/BoardList";
@@ -7,17 +7,12 @@ import { boardList } from "../../data/boardData";
 import Modal from "../../components/UI/Modal/Modal";
 import AddBoardForm from "../../components/AddBoardForm/AddBoardForm";
 import fire from "../../firebaseConfig";
+import { formatJSON } from "../../helpers/formatFirebaseData";
 
 const BoardsContainer = ({ groups }) => {
-  const [groupList, addGroup] = useState(groups);
-  const [currentGroup, updateCurrentGroup] = useState(groups[0]);
+  const [groupList, updateGroupList] = useState(groups);
   const [addBoardSelected, toggleAddBoardSelected] = useState(false);
   const [addBoardInput, updateAddBoardInput] = useState("");
-
-  const filterBoardsByGroup = (groupName) => {
-    const currIdx = groupList.findIndex((group) => group.name === groupName);
-    updateCurrentGroup(groupList[currIdx]);
-  };
 
   const toggleModalDisplay = (val) => {
     toggleAddBoardSelected(val);
@@ -37,12 +32,24 @@ const BoardsContainer = ({ groups }) => {
       groupName: currentGroup.name,
     });
 
-    //
+    // Add board to boards child of current group
     const groupsRef = fire
       .database()
       .ref(`groups/${currentGroup.key}`)
       .child("boards");
-    groupsRef.update({ [newBoard.key]: true });
+    groupsRef.update({
+      [newBoard.key]: {
+        name: addBoardInput,
+      },
+    });
+
+    // Fetch new group and board data from firebase following board addition
+    const allGroupsRef = fire.database().ref("groups");
+    allGroupsRef.on("value", (snap) => {
+      console.log("Is this running? ");
+      const mappedGroups = formatJSON(snap.val());
+      updateGroupList(mappedGroups);
+    });
 
     toggleAddBoardSelected(false);
   };
@@ -57,12 +64,8 @@ const BoardsContainer = ({ groups }) => {
         />
       </Modal>
       <div className={styles.BoardsContainer}>
-        <GroupList groups={groups} handleGroupSelect={filterBoardsByGroup} />
-        <BoardList
-          group={currentGroup.name}
-          boards={currentGroup.boards}
-          open={() => toggleModalDisplay(true)}
-        />
+        <GroupList groups={groupList} />
+        <BoardList groups={groupList} open={() => toggleModalDisplay(true)} />
       </div>
     </>
   );

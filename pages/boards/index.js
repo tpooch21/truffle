@@ -8,6 +8,7 @@ const BoardsPage = ({ groups }) => (
   </Layout>
 );
 
+// This fetches initial data on server sie when /boards route is visited
 export async function getStaticProps(context) {
   let groupObj;
   const groupsRef = fire.database().ref("groups");
@@ -18,7 +19,7 @@ export async function getStaticProps(context) {
   const groups = Object.keys(groupObj).map((key) => ({
     key: key,
     name: groupObj[key].name,
-    boards: groupObj[key].boards,
+    boards: groupObj[key].boards || null,
   }));
 
   return {
