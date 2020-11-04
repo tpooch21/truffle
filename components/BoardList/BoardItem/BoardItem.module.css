@@ -21,7 +21,7 @@
 }
 
 .BoardItem p {
-  z-index: 10;
+  z-index: 1;
   line-height: 100%;
   margin-right: 0.5em;
   font-weight: 600;

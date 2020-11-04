@@ -6,6 +6,7 @@
   justify-content: flex-start;
   align-items: center;
   font-family: inherit;
+  height: 100vh;
 }
 
 .Layout h1 {

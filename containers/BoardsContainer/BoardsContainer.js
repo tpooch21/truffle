@@ -54,7 +54,6 @@ const BoardsContainer = ({ groups }) => {
     // Fetch new group and board data from firebase following board addition
     const allGroupsRef = fire.database().ref("groups");
     allGroupsRef.on("value", (snap) => {
-      console.log("Is this running? ");
       const mappedGroups = formatJSON(snap.val());
 
       // update groupList to display newly-added board following state update
@@ -62,6 +61,7 @@ const BoardsContainer = ({ groups }) => {
     });
 
     toggleAddBoardSelected(false);
+    updateAddBoardInput("");
   };
 
   return (
