@@ -11,8 +11,8 @@ const Group = ({ group }) => (
 );
 
 export async function getStaticPaths() {
-  const paths = getAllGroupIds();
-  console.log("Logging paths => ", paths);
+  const paths = await getAllGroupIds();
+  console.log("Paths => ", paths);
   return {
     paths,
     fallback: false,
@@ -20,10 +20,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const groupData = getGroupDataById(params.id);
+  const groupData = await getGroupDataById(params.id);
+  const group = [];
+  group.push({
+    ...groupData.group,
+    key: groupData.group.name,
+  });
+
   return {
     props: {
-      group: groupData.group,
+      group,
     },
   };
 }
