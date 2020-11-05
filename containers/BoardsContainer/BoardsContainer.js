@@ -9,11 +9,13 @@ import AddBoardForm from "../../components/AddBoardForm/AddBoardForm";
 import fire from "../../firebaseConfig";
 import { formatJSON } from "../../helpers/formatFirebaseData";
 
-const BoardsContainer = ({ groups }) => {
+const BoardsContainer = ({ groups, currentGroup = null }) => {
   const [groupList, updateGroupList] = useState(groups);
   const [addBoardSelected, toggleAddBoardSelected] = useState(false);
-  const [currentGroup, selectCurrentGroup] = useState(null);
+  const [modalGroup, updateModalGroup] = useState("");
   const [addBoardInput, updateAddBoardInput] = useState("");
+
+  console.log("Logging current group => ", currentGroup);
 
   const toggleModalDisplay = (val, groupName) => {
     // If modal is being closed, no need to search for selected group, and currentGroup is set to null
@@ -23,7 +25,7 @@ const BoardsContainer = ({ groups }) => {
     const group = groupIdx !== null ? groupList[groupIdx] : null;
 
     toggleAddBoardSelected(val);
-    selectCurrentGroup(group);
+    updateModalGroup(group);
   };
 
   const handleUserInput = (e) => {
@@ -69,10 +71,9 @@ const BoardsContainer = ({ groups }) => {
       <Modal
         show={addBoardSelected}
         close={() => toggleModalDisplay(false, null)}
-        currentGroup={currentGroup}
       >
         <header>
-          <h2>Add Board to {currentGroup ? currentGroup.name : ""}</h2>
+          <h2>Add Board to {modalGroup ? modalGroup.name : ""}</h2>
         </header>
         <AddBoardForm
           input={addBoardInput}
@@ -82,7 +83,10 @@ const BoardsContainer = ({ groups }) => {
       </Modal>
       <div className={styles.BoardsContainer}>
         <GroupList groups={groupList} />
-        <BoardList groups={groupList} open={toggleModalDisplay} />
+        <BoardList
+          groups={currentGroup || groupList}
+          open={toggleModalDisplay}
+        />
       </div>
     </>
   );
