@@ -1,4 +1,4 @@
-.GroupButton {
+.GroupAnchor {
   width: 80%;
   background: var(--main-purple-light);
   color: var(--main-cream);
@@ -8,8 +8,10 @@
   margin: 0.5rem 0;
   cursor: pointer;
   line-height: 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
-.GroupButton:hover {
+.GroupAnchor:hover {
   background: var(--main-purple-med);
 }

@@ -1,9 +1,10 @@
 import styles from "./GroupItem.module.css";
+import Link from "next/link";
 
-const GroupItem = ({ name, onClick }) => (
-  <button className={styles.GroupButton} onClick={onClick}>
-    {name}
-  </button>
+const GroupItem = ({ name, id }) => (
+  <Link href={`/groups/${id}`}>
+    <a className={styles.GroupAnchor}>{name}</a>
+  </Link>
 );
 
 export default GroupItem;
