@@ -2,17 +2,20 @@
 // Just boards for now
 import Layout from "../../components/Layout/Layout";
 import BoardsContainer from "../../containers/BoardsContainer/BoardsContainer";
-import { getAllGroupIds, getGroupDataById } from "../../lib/groups";
+import {
+  getAllGroupIds,
+  getGroupDataById,
+  getAllGroupData,
+} from "../../lib/groups";
 
-const Group = ({ group }) => (
+const Group = ({ currentGroup, allGroups }) => (
   <Layout>
-    <BoardsContainer groups={group} />
+    <BoardsContainer currentGroup={currentGroup} groups={allGroups} />
   </Layout>
 );
 
 export async function getStaticPaths() {
   const paths = await getAllGroupIds();
-  console.log("Paths => ", paths);
   return {
     paths,
     fallback: false,
@@ -20,16 +23,19 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const groupData = await getGroupDataById(params.id);
+  const currentGroup = await getGroupDataById(params.id);
+  const allGroups = await getAllGroupData();
+
   const group = [];
   group.push({
-    ...groupData.group,
-    key: groupData.group.name,
+    ...currentGroup.group,
+    key: currentGroup.group.name,
   });
 
   return {
     props: {
-      group,
+      currentGroup: group,
+      allGroups,
     },
   };
 }
