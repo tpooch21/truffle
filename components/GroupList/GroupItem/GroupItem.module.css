@@ -1,4 +1,4 @@
-.GroupAnchor {
+.GroupItem {
   width: 80%;
   background: var(--main-purple-light);
   color: var(--main-cream);
@@ -12,6 +12,18 @@
   font-weight: 500;
 }
 
-.GroupAnchor:hover {
+.GroupItem:hover {
   background: var(--main-purple-med);
+}
+
+.addGroup {
+  background: #ddd;
+  color: black;
+  width: 60%;
+  font-weight: 500;
+}
+
+.addGroup:hover {
+  background: #ddd;
+  opacity: 0.8;
 }

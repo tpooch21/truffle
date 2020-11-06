@@ -14,8 +14,11 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
   const [addBoardSelected, toggleAddBoardSelected] = useState(false);
   const [modalGroup, updateModalGroup] = useState("");
   const [addBoardInput, updateAddBoardInput] = useState("");
+  const [currentBoardGroup, updateCurrentBoardGroup] = useState(currentGroup);
 
-  console.log("Logging current group => ", currentGroup);
+  useEffect(() => {
+    updateCurrentBoardGroup(currentGroup);
+  }, [currentGroup]);
 
   const toggleModalDisplay = (val, groupName) => {
     // If modal is being closed, no need to search for selected group, and currentGroup is set to null
@@ -38,14 +41,14 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
     const newBoard = boardsRef.push();
     newBoard.set({
       name: addBoardInput,
-      groupId: currentGroup.key,
-      groupName: currentGroup.name,
+      groupId: modalGroup.key,
+      groupName: modalGroup.name,
     });
 
     // Add board to boards child of current group
     const groupsRef = fire
       .database()
-      .ref(`groups/${currentGroup.key}`)
+      .ref(`groups/${modalGroup.key}`)
       .child("boards");
     groupsRef.update({
       [newBoard.key]: {
@@ -64,6 +67,27 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
 
     toggleAddBoardSelected(false);
     updateAddBoardInput("");
+    fetchCurrentGroupData();
+  };
+
+  /* When a board is added from a groups/[id] page, the pre-rendered data that was passed as props won't be up to date,
+     so we need to fetch it on the client side */
+  const fetchCurrentGroupData = () => {
+    if (currentBoardGroup === null) return;
+    else {
+      const currentBoard = currentBoardGroup[0];
+      const groupRef = fire.database().ref(`groups/${currentBoard.key}`);
+      groupRef.once("value").then((snap) => {
+        const groupData = snap.val();
+        const boardFormatted = [
+          {
+            ...groupData,
+            key: groupData.name,
+          },
+        ];
+        updateCurrentBoardGroup(boardFormatted);
+      });
+    }
   };
 
   return (
@@ -84,7 +108,7 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
       <div className={styles.BoardsContainer}>
         <GroupList groups={groupList} />
         <BoardList
-          groups={currentGroup || groupList}
+          groups={currentBoardGroup || groupList}
           open={toggleModalDisplay}
         />
       </div>
