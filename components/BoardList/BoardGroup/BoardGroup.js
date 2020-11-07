@@ -12,8 +12,6 @@ const BoardGroup = ({ groupName, boards, open, id }) => {
       })
     : null;
 
-  console.log("Logging boardsList => ", boardsList);
-
   return (
     <section className={styles.BoardGroup}>
       <header className={styles.BoardGroup__header}>

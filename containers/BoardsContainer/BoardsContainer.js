@@ -106,7 +106,6 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
 
   return (
     <>
-      <p>Boards Container</p>
       <Modal
         show={addBoardSelected}
         close={() => toggleModalDisplay(false, null)}

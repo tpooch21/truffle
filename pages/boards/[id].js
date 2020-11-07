@@ -20,6 +20,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // fetch data for single board from firebase
   const boardData = await getBoardById(params.id);
+  console.log("Logging boardData => ", boardData);
   return {
     props: {
       boardData,
