@@ -3,7 +3,7 @@ import styles from "../LoginForm/LoginForm.module.css";
 const AddBoardForm = ({ input, onUserInput, onSubmit }) => (
   <>
     <form onSubmit={onSubmit} className={styles.formBody}>
-      <label className={styles.inputLabel} for="name">
+      <label className={styles.inputLabel} htmlFor="name">
         Board Name:
       </label>
       <input

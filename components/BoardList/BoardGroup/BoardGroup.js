@@ -12,6 +12,8 @@ const BoardGroup = ({ groupName, boards, open, id }) => {
       })
     : null;
 
+  console.log("Logging boardsList => ", boardsList);
+
   return (
     <section className={styles.BoardGroup}>
       <header className={styles.BoardGroup__header}>
@@ -21,7 +23,7 @@ const BoardGroup = ({ groupName, boards, open, id }) => {
       <section className={styles.BoardGroup__grid}>
         {boardsList &&
           boardsList.map(({ name, key }) => (
-            <BoardItem key={key} title={name} />
+            <BoardItem key={key} title={name} id={key} />
           ))}
         <AddBoardItem add={open} />
       </section>

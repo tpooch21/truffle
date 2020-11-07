@@ -12,9 +12,11 @@ import { formatJSON } from "../../helpers/formatFirebaseData";
 const BoardsContainer = ({ groups, currentGroup = null }) => {
   const [groupList, updateGroupList] = useState(groups);
   const [addBoardSelected, toggleAddBoardSelected] = useState(false);
+  const [currentBoardGroup, updateCurrentBoardGroup] = useState(currentGroup);
+
   const [modalGroup, updateModalGroup] = useState("");
   const [addBoardInput, updateAddBoardInput] = useState("");
-  const [currentBoardGroup, updateCurrentBoardGroup] = useState(currentGroup);
+  const [addGroupInput, updateAddGroupInput] = useState("");
 
   useEffect(() => {
     updateCurrentBoardGroup(currentGroup);
@@ -70,6 +72,18 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
     fetchCurrentGroupData();
   };
 
+  const handleAddGroup = () => {
+    const groupsRef = fire.database().ref("groups");
+    groupsRef.push({
+      name: addGroupInput,
+    });
+
+    groupsRef.on("value").then((snap) => {
+      const mappedGroups = formatJSON(snap.val());
+      updateGroupList(mappedGroups);
+    });
+  };
+
   /* When a board is added from a groups/[id] page, the pre-rendered data that was passed as props won't be up to date,
      so we need to fetch it on the client side */
   const fetchCurrentGroupData = () => {
@@ -92,6 +106,7 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
 
   return (
     <>
+      <p>Boards Container</p>
       <Modal
         show={addBoardSelected}
         close={() => toggleModalDisplay(false, null)}

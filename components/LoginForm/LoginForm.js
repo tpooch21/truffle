@@ -5,7 +5,7 @@ const LoginForm = () => (
   <div className={styles.LoginForm}>
     <h3>Login to Get Organized</h3>
     <form className={styles.formBody}>
-      <label className={styles.inputLabel} for="email">
+      <label className={styles.inputLabel} htmlFor="email">
         Email:
       </label>
       <input
@@ -14,7 +14,7 @@ const LoginForm = () => (
         type="text"
         placeholder="Email address"
       />
-      <label className={styles.inputLabel} for="password">
+      <label className={styles.inputLabel} htmlFor="password">
         Password:
       </label>
       <input
