@@ -1,15 +1,15 @@
-import styles from "./LoginForm.module.css";
+import styles from "../../styles/genericForm.module.css";
 import Link from "next/link";
 
 const LoginForm = () => (
-  <div className={styles.LoginForm}>
+  <div className={styles.GenericForm}>
     <h3>Login to Get Organized</h3>
     <form className={styles.formBody}>
       <label className={styles.inputLabel} htmlFor="email">
         Email:
       </label>
       <input
-        className={styles.email}
+        className={styles.textInput}
         name="email"
         type="text"
         placeholder="Email address"
@@ -18,7 +18,7 @@ const LoginForm = () => (
         Password:
       </label>
       <input
-        className={styles.password}
+        className={styles.textInput}
         name="password"
         type="text"
         placeholder="Password"

@@ -9,7 +9,7 @@ const BoardList = ({ groups, open }) => {
           key={key}
           groupName={name}
           boards={boards}
-          open={() => open(true, name)}
+          open={() => open(name)}
           id={key}
         />
       ))}

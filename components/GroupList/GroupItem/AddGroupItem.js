@@ -1,8 +1,8 @@
 import styles from "./GroupItem.module.css";
 
-const AddGroupItem = () => {
+const AddGroupItem = ({ open }) => {
   return (
-    <button className={`${styles.GroupItem} ${styles.addGroup}`}>
+    <button className={`${styles.GroupItem} ${styles.addGroup}`} onClick={open}>
       Add Group
     </button>
   );

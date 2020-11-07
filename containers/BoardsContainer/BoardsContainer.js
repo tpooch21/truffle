@@ -5,36 +5,56 @@ import BoardList from "../../components/BoardList/BoardList";
 import GroupList from "../../components/GroupList/GroupList";
 import { boardList } from "../../data/boardData";
 import Modal from "../../components/UI/Modal/Modal";
-import AddBoardForm from "../../components/AddBoardForm/AddBoardForm";
+import AddItemForm from "../../components/AddItemForms/AddItemForm";
 import fire from "../../firebaseConfig";
 import { formatJSON } from "../../helpers/formatFirebaseData";
 
 const BoardsContainer = ({ groups, currentGroup = null }) => {
   const [groupList, updateGroupList] = useState(groups);
-  const [addBoardSelected, toggleAddBoardSelected] = useState(false);
   const [currentBoardGroup, updateCurrentBoardGroup] = useState(currentGroup);
 
+  // Modal display state
+  const [displayModal, toggleDisplayModal] = useState(false);
+  /* Modal will be displayed for both board and group additions, so if 'modalForBoard' is true
+  it's being displayed for a board, and if it's false, the user is adding a group */
+  const [modalForBoard, toggleModalForBoard] = useState(true);
+
   const [modalGroup, updateModalGroup] = useState("");
-  const [addBoardInput, updateAddBoardInput] = useState("");
-  const [addGroupInput, updateAddGroupInput] = useState("");
+  const [userInput, updateUserInput] = useState("");
 
   useEffect(() => {
     updateCurrentBoardGroup(currentGroup);
   }, [currentGroup]);
 
-  const toggleModalDisplay = (val, groupName) => {
-    // If modal is being closed, no need to search for selected group, and currentGroup is set to null
+  const toggleModalDisplay = (groupName) => {
+    /**
+     * If a groupName is passed in, that means the user is on the main board page, adding a board
+     * The groupName arg specifies which group the board should be added to in firebase when it's submitted
+     *
+     * If there's no groupName, we know the modal is either being closed, or a group is being added (not a board)
+     * */
     const groupIdx = groupName
       ? groupList.findIndex((group) => group.name === groupName)
       : null;
     const group = groupIdx !== null ? groupList[groupIdx] : null;
 
-    toggleAddBoardSelected(val);
-    updateModalGroup(group);
+    // As noted above, if there's a group being passed in, the add board modal should be displayed
+    const isBoardModal = groupName !== null;
+
+    // If modal is being closed (meaning displayModal is true), no need to determine whether a board or group modal should be displayed next
+    if (!displayModal) toggleModalForBoard(isBoardModal);
+    toggleDisplayModal(!displayModal);
+    if (group) updateModalGroup(group);
   };
 
   const handleUserInput = (e) => {
-    updateAddBoardInput(e.target.value);
+    updateUserInput(e.target.value);
+  };
+
+  // delegates duties to the appropriate handler, based on whether a board or group is being added
+  const handleSubmit = (isBoard) => {
+    if (isBoard) handleAddBoard();
+    else handleAddGroup();
   };
 
   const handleAddBoard = () => {
@@ -42,7 +62,7 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
     const boardsRef = fire.database().ref("boards");
     const newBoard = boardsRef.push();
     newBoard.set({
-      name: addBoardInput,
+      name: userInput,
       groupId: modalGroup.key,
       groupName: modalGroup.name,
     });
@@ -54,7 +74,7 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
       .child("boards");
     groupsRef.update({
       [newBoard.key]: {
-        name: addBoardInput,
+        name: userInput,
       },
     });
 
@@ -75,7 +95,7 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
   const handleAddGroup = () => {
     const groupsRef = fire.database().ref("groups");
     groupsRef.push({
-      name: addGroupInput,
+      name: userInput,
     });
 
     groupsRef.on("value").then((snap) => {
@@ -106,21 +126,17 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
 
   return (
     <>
-      <Modal
-        show={addBoardSelected}
-        close={() => toggleModalDisplay(false, null)}
-      >
-        <header>
-          <h2>Add Board to {modalGroup ? modalGroup.name : ""}</h2>
-        </header>
-        <AddBoardForm
-          input={addBoardInput}
-          onUserInput={handleUserInput}
-          onSubmit={handleAddBoard}
-        />
-      </Modal>
+      <AddItemForm
+        input={userInput}
+        onUserInput={handleUserInput}
+        onSubmit={handleSubmit}
+        show={displayModal}
+        close={() => toggleModalDisplay(null)}
+        addBoard={modalForBoard}
+        modalGroupName={modalGroup.name}
+      />
       <div className={styles.BoardsContainer}>
-        <GroupList groups={groupList} />
+        <GroupList groups={groupList} open={() => toggleModalDisplay(null)} />
         <BoardList
           groups={currentBoardGroup || groupList}
           open={toggleModalDisplay}

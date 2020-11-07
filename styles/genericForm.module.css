@@ -1,4 +1,4 @@
-.LoginForm {
+.GenericForm {
   width: 36rem;
   background: var(--main-gray);
   box-shadow: 2px 2px #bbb;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.LoginForm h3 {
+.GenericForm h3 {
   color: var(--main-purple);
 }
 
@@ -28,8 +28,8 @@
   margin: 20px auto 0;
 }
 
-.email,
-.password {
+.textInput,
+.textInput {
   width: 50%;
   height: 30px;
   margin: 10px auto;
