@@ -8,6 +8,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import AddItemForm from "../../components/AddItemForms/AddItemForm";
 import fire from "../../firebaseConfig";
 import { formatJSON } from "../../helpers/formatFirebaseData";
+import { getGroupDataById } from "../../helpers/firebaseQueries.js";
 
 const BoardsContainer = ({ groups, currentGroup = null }) => {
   const [groupList, updateGroupList] = useState(groups);
@@ -52,7 +53,8 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
   };
 
   // delegates duties to the appropriate handler, based on whether a board or group is being added
-  const handleSubmit = (isBoard) => {
+  const handleSubmit = (e, isBoard) => {
+    e.preventDefault();
     if (isBoard) handleAddBoard();
     else handleAddGroup();
   };
@@ -82,45 +84,46 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
     const allGroupsRef = fire.database().ref("groups");
     allGroupsRef.on("value", (snap) => {
       const mappedGroups = formatJSON(snap.val());
-
       // update groupList to display newly-added board following state update
       updateGroupList(mappedGroups);
+      toggleDisplayModal(false);
+      updateUserInput("");
+      fetchCurrentGroupData();
     });
 
-    toggleAddBoardSelected(false);
-    updateAddBoardInput("");
-    fetchCurrentGroupData();
   };
 
   const handleAddGroup = () => {
-    const groupsRef = fire.database().ref("groups");
+    const groupsRef = fire.database().ref('groups');
+    // If no groups have been added yet, the value will be 0
+    groupsRef.once('value', (snap) => console.log(snap.val()))
     groupsRef.push({
-      name: userInput,
+      name: userInput
     });
 
-    groupsRef.on("value").then((snap) => {
+    groupsRef.on("value", (snap) => {
       const mappedGroups = formatJSON(snap.val());
       updateGroupList(mappedGroups);
+      toggleDisplayModal(false);
     });
+
   };
 
   /* When a board is added from a groups/[id] page, the pre-rendered data that was passed as props won't be up to date,
      so we need to fetch it on the client side */
-  const fetchCurrentGroupData = () => {
+  async function fetchCurrentGroupData() {
     if (currentBoardGroup === null) return;
     else {
       const currentBoard = currentBoardGroup[0];
-      const groupRef = fire.database().ref(`groups/${currentBoard.key}`);
-      groupRef.once("value").then((snap) => {
-        const groupData = snap.val();
-        const boardFormatted = [
-          {
-            ...groupData,
-            key: groupData.name,
-          },
-        ];
-        updateCurrentBoardGroup(boardFormatted);
-      });
+      const groupData = await getGroupDataById(currentBoard.key);
+      const boardFormatted = [
+        {
+          ...groupData.group,
+          key: groupData.id,
+        },
+      ];
+      debugger;
+      updateCurrentBoardGroup(boardFormatted);
     }
   };
 

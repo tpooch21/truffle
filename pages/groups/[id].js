@@ -26,12 +26,12 @@ export async function getStaticProps({ params }) {
   const currentGroup = await getGroupDataById(params.id);
   const allGroups = await getAllGroupData();
 
-  console.log("group id => ", params.id);
+  console.log('Logging currentGroup => ', currentGroup);
 
   const group = [];
   group.push({
     ...currentGroup.group,
-    key: currentGroup.group.name,
+    key: currentGroup.id,
   });
 
   return {

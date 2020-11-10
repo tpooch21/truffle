@@ -6,3 +6,12 @@
   align-items: flex-start;
   margin-left: 20px;
 }
+
+.addGroup {
+  margin: 2rem auto 0 auto;
+}
+
+.BoardList hr {
+  border-top: 4px solid var(--main-purple-light);
+  width: 100%;
+}

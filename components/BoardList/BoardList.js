@@ -2,9 +2,10 @@ import styles from "./BoardList.module.css";
 import BoardGroup from "./BoardGroup/BoardGroup";
 
 const BoardList = ({ groups, open }) => {
+
   return (
     <div className={styles.BoardList}>
-      {groups.map(({ key, name, boards }) => (
+      {groups.length > 0 ? groups.map(({ key, name, boards }) => (
         <BoardGroup
           key={key}
           groupName={name}
@@ -12,8 +13,11 @@ const BoardList = ({ groups, open }) => {
           open={() => open(name)}
           id={key}
         />
-      ))}
-      {/* <p>Board List</p> */}
+      )) :
+      <>
+        <h2 className={styles.addGroup}>Add a Group to Start Creating Boards!</h2>
+        <hr />
+      </>}
     </div>
   );
 };
