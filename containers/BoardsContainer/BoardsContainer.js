@@ -94,19 +94,23 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
   };
 
   const handleAddGroup = () => {
-    const groupsRef = fire.database().ref('groups');
-    // If no groups have been added yet, the value will be 0
-    groupsRef.once('value', (snap) => console.log(snap.val()))
-    groupsRef.push({
-      name: userInput
-    });
+    const postData = { name: userInput }
+    fetch('http://localhost:3000/api/groups', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData)
+    })
+    .then(_ =>
+      fetch('http://localhost:3000/api/groups')
+        .then(res => res.json())
+        .then(data => updateGroupList(data.groups))
+        .catch(err => console.log(err)))
+    .catch(err => console.log(err));
 
-    groupsRef.on("value", (snap) => {
-      const mappedGroups = formatJSON(snap.val());
-      updateGroupList(mappedGroups);
-      toggleDisplayModal(false);
-    });
-
+    // Close modal, doesn't need to wait for above operation to finish
+    toggleDisplayModal(false);
   };
 
   /* When a board is added from a groups/[id] page, the pre-rendered data that was passed as props won't be up to date,
@@ -122,7 +126,6 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
           key: groupData.id,
         },
       ];
-      debugger;
       updateCurrentBoardGroup(boardFormatted);
     }
   };

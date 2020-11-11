@@ -7,6 +7,7 @@ const GroupList = ({ groups, open }) => {
     console.log("GroupList is re-rendering");
   }, [groups]);
 
+  debugger;
   return (
     <section className={styles.GroupList}>
       <header>
