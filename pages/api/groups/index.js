@@ -8,7 +8,7 @@ const handler = nc()
   .get(async (req, res) => {
     const groupsSnap = await groupsRef.once("value");
     const mappedGroups = formatJSON(groupsSnap.val());
-    res.json({ groups: mappedGroups });
+    res.json({ groups: mappedGroups }).status(200);
   })
   .post((req, res) => {
     groupsRef.push({...req.body}, (err) => {
@@ -18,9 +18,3 @@ const handler = nc()
   })
 
   export default handler;
-
-  // FOR POST ROUTE
-  // If no groups have been added yet, the value will be 0
-  // await groupsRef.push({
-  //   name: userInput
-  // });

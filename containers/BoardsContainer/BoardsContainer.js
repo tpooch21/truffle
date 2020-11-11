@@ -102,15 +102,16 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
       },
       body: JSON.stringify(postData)
     })
-    .then(_ =>
+    .then(() =>
       fetch('http://localhost:3000/api/groups')
         .then(res => res.json())
         .then(data => updateGroupList(data.groups))
         .catch(err => console.log(err)))
     .catch(err => console.log(err));
 
-    // Close modal, doesn't need to wait for above operation to finish
+    // Close modal and clear user input, doesn't need to wait for above operation to finish
     toggleDisplayModal(false);
+    updateUserInput('');
   };
 
   /* When a board is added from a groups/[id] page, the pre-rendered data that was passed as props won't be up to date,
@@ -119,14 +120,19 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
     if (currentBoardGroup === null) return;
     else {
       const currentBoard = currentBoardGroup[0];
-      const groupData = await getGroupDataById(currentBoard.key);
-      const boardFormatted = [
-        {
-          ...groupData.group,
-          key: groupData.id,
-        },
-      ];
-      updateCurrentBoardGroup(boardFormatted);
+      fetch(`http://localhost:3000/api/group/${currentBoard.key}`)
+        .then(res => res.json())
+        .then(data => {
+          const formattedGroup = [
+            {
+              ...data.group,
+              key: currentBoard.key
+            },
+          ];
+          updateCurrentBoardGroup(boardFormatted);
+        })
+        // ADD ERROR HANDLER TO STATE
+        .catch(err => console.log(err));
     }
   };
 
