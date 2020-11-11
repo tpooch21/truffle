@@ -8,6 +8,7 @@ const handler = nc()
   .get(async (req, res) => {
     const groupsSnap = await groupsRef.once("value");
     const mappedGroups = formatJSON(groupsSnap.val());
+    console.log('Logging mapped groups => ', mappedGroups);
     res.json({ groups: mappedGroups }).status(200);
   })
   .post((req, res) => {

@@ -1,6 +1,9 @@
 import styles from "./BoardList.module.css";
 import BoardGroup from "./BoardGroup/BoardGroup";
 
+/**
+ * Render boardList after fetching board data (by group)
+ */
 const BoardList = ({ groups, open }) => {
 
   return (

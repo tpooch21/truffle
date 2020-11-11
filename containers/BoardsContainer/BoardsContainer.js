@@ -3,12 +3,12 @@ import Link from "next/link";
 import styles from "./BoardsContainer.module.css";
 import BoardList from "../../components/BoardList/BoardList";
 import GroupList from "../../components/GroupList/GroupList";
-import { boardList } from "../../data/boardData";
 import Modal from "../../components/UI/Modal/Modal";
 import AddItemForm from "../../components/AddItemForms/AddItemForm";
 import fire from "../../firebaseConfig";
 import { formatJSON } from "../../helpers/formatFirebaseData";
 import { getGroupDataById } from "../../helpers/firebaseQueries.js";
+import  { mutate } from 'swr';
 
 const BoardsContainer = ({ groups, currentGroup = null }) => {
   const [groupList, updateGroupList] = useState(groups);
@@ -102,16 +102,12 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
       },
       body: JSON.stringify(postData)
     })
-    .then(() =>
-      fetch('http://localhost:3000/api/groups')
-        .then(res => res.json())
-        .then(data => updateGroupList(data.groups))
-        .catch(err => console.log(err)))
+    .then(() => {
+      toggleModalDisplay(false);
+      updateUserInput('');
+      mutate('http://localhost:3000/api/groups');
+    })
     .catch(err => console.log(err));
-
-    // Close modal and clear user input, doesn't need to wait for above operation to finish
-    toggleDisplayModal(false);
-    updateUserInput('');
   };
 
   /* When a board is added from a groups/[id] page, the pre-rendered data that was passed as props won't be up to date,
@@ -148,7 +144,7 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
         modalGroupName={modalGroup.name}
       />
       <div className={styles.BoardsContainer}>
-        <GroupList groups={groupList} open={() => toggleModalDisplay(null)} />
+        <GroupList open={() => toggleModalDisplay(null)} />
         <BoardList
           groups={currentBoardGroup || groupList}
           open={toggleModalDisplay}
