@@ -7,9 +7,13 @@
   text-align: center;
   margin: 0.5rem 0;
   cursor: pointer;
-  line-height: 2rem;
+  line-height: 1rem;
   font-size: 0.8rem;
   font-weight: 500;
+}
+
+.GroupItem p {
+  line-height: 1rem;
 }
 
 .GroupItem:hover {
