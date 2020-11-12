@@ -10,7 +10,7 @@ import { formatJSON } from "../../helpers/formatFirebaseData";
 import { getGroupDataById } from "../../helpers/firebaseQueries.js";
 import  { mutate } from 'swr';
 
-const BoardsContainer = ({ groups, currentGroup = null }) => {
+const BoardsContainer = ({ currentGroupId = null }) => {
   // Modal display state
   const [displayModal, toggleDisplayModal] = useState(false);
   /* Modal will be displayed for both board and group additions, so if 'modalForBoard' is true
@@ -139,6 +139,7 @@ const BoardsContainer = ({ groups, currentGroup = null }) => {
       <div className={styles.BoardsContainer}>
         <GroupList open={() => toggleModalDisplay(null)} />
         <BoardList
+          currentGroupId={currentGroupId}
           open={toggleModalDisplay}
         />
       </div>

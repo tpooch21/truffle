@@ -4,10 +4,11 @@ import useGroups from '../../dataHooks/useGroups';
 /**
  * Render boardList after fetching board data (by group)
  */
-const BoardList = ({ groups, open }) => {
-  const { data, isLoading, isError } = useGroups();
+const BoardList = ({ currentGroupId, open }) => {
+  const { data, isLoading, isError } = useGroups(currentGroupId);
 
   if (isLoading) return <p>BoardList is Loading...</p>
+
   return (
     <div className={styles.BoardList}>
       {data.groups.length > 0 ? data.groups.map(({ key, name, boards }) => (
