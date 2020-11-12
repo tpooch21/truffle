@@ -8,11 +8,10 @@
 }
 
 .allBoardsHeader {
-  font-size: 12px;
-  margin-left: 20px;
-  margin-bottom: 1rem;
-  line-height: 0.5em;
+  font-size: 8px;
+  margin: 10px 20px;
   padding: 0 10px;
+  line-height: 0.5em;
   color: white;
   background: black;
   border-radius: 5px;

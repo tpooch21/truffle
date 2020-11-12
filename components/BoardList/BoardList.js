@@ -24,7 +24,7 @@ const BoardList = ({ currentGroupId, open }) => {
           key={key}
           groupName={name}
           boards={boards}
-          open={() => open(name)}
+          open={() => open(key, name)}
           id={key}
         />
       )) :

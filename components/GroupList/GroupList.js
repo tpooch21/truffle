@@ -16,8 +16,8 @@ const GroupList = ({ open }) => {
 
   return (
     <section className={styles.GroupList}>
-      <header>
-        <h4>Groups</h4>
+      <header className={styles.GroupList__header}>
+        <h1>Groups</h1>
       </header>
       {data.groups.map((group) => (
         <GroupItem key={group.key} name={group.name} id={group.key} />

@@ -16,29 +16,18 @@ const BoardsContainer = ({ currentGroupId = null }) => {
   /* Modal will be displayed for both board and group additions, so if 'modalForBoard' is true
   it's being displayed for a board, and if it's false, the user is adding a group */
   const [modalForBoard, toggleModalForBoard] = useState(true);
-
   const [modalGroup, updateModalGroup] = useState("");
   const [userInput, updateUserInput] = useState("");
 
-  const toggleModalDisplay = (groupName) => {
-    /**
-     * If a groupName is passed in, that means the user is on the main board page, adding a board
-     * The groupName arg specifies which group the board should be added to in firebase when it's submitted
-     *
-     * If there's no groupName, we know the modal is either being closed, or a group is being added (not a board)
-     * */
-    const groupIdx = groupName
-      ? groupList.findIndex((group) => group.name === groupName)
-      : null;
-    const group = groupIdx !== null ? groupList[groupIdx] : null;
-
-    // As noted above, if there's a group being passed in, the add board modal should be displayed
-    const isBoardModal = groupName !== null;
+  const toggleModalDisplay = (key, name) => {
+    /* If a group key is being passed as an arg, then the function was called from the 'Add Board' handler. modalForBoard should be set to true */
+    const isBoardModal = key !== undefined;
 
     // If modal is being closed (meaning displayModal is true), no need to determine whether a board or group modal should be displayed next
     if (!displayModal) toggleModalForBoard(isBoardModal);
+
     toggleDisplayModal(!displayModal);
-    if (group) updateModalGroup(group);
+    if (key) updateModalGroup({key, name});
   };
 
   const handleUserInput = (e) => {
