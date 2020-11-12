@@ -9,14 +9,4 @@ const BoardsPage = ({ groups }) => (
   </Layout>
 );
 
-// This fetches initial data on server sie when /boards route is visited
-export async function getStaticProps(context) {
-  const groups = await getAllGroupData();
-  return {
-    props: {
-      groups,
-    },
-  };
-}
-
 export default BoardsPage;
