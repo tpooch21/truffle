@@ -3,9 +3,9 @@ import Layout from "../../components/Layout/Layout";
 import fire from "../../firebaseConfig";
 import { getAllGroupData } from "../../lib/groups";
 
-const BoardsPage = ({ groups }) => (
+const BoardsPage = () => (
   <Layout>
-    <BoardsContainer groups={groups} />
+    <BoardsContainer />
   </Layout>
 );
 

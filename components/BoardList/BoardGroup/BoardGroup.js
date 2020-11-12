@@ -1,6 +1,7 @@
 import BoardItem from "../BoardItem/BoardItem";
 import styles from "./BoardGroup.module.css";
 import AddBoardItem from "../BoardItem/AddBoardItem";
+import { BsPeopleFill } from 'react-icons/bs';
 
 const BoardGroup = ({ groupName, boards, open, id }) => {
   const boardsList = boards
@@ -15,6 +16,7 @@ const BoardGroup = ({ groupName, boards, open, id }) => {
   return (
     <section className={styles.BoardGroup}>
       <header className={styles.BoardGroup__header}>
+        <BsPeopleFill style={{ height: "1.2em", width: "1.2em", marginRight: '5px' }}/>
         <h3>{groupName} Boards</h3>
       </header>
       <hr />
