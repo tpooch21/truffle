@@ -1,8 +1,10 @@
 import styles from "../../../styles/genericForm.module.css";
+import ImageCarousel from "../../ImageCarousel/ImageCarousel";
+
 // item will evaluate to either 'board' or 'group'
 const AddBoardOrGroup = ({ item, onSubmit, input, onUserInput }) => {
   const cap = item.charAt(0).toUpperCase() + item.slice(1);
-  const isBoard = item === 'board';
+  const isBoard = item === "board";
   return (
     <form onSubmit={(e) => onSubmit(e, isBoard)} className={styles.formBody}>
       <label className={styles.inputLabel} htmlFor="name">
@@ -16,6 +18,7 @@ const AddBoardOrGroup = ({ item, onSubmit, input, onUserInput }) => {
         placeholder={`Enter a name for your ${item}`}
         value={input}
       />
+      {isBoard && <ImageCarousel />}
       <input className={styles.submit} type="submit" value={`Add ${cap}`} />
     </form>
   );

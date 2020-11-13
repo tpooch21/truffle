@@ -1,0 +1,23 @@
+.ImageCarousel {
+  width: 80%;
+  height: 5rem;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto;
+  border: 1px solid black;
+}
+
+.btnImage {
+  width: 20%;
+  overflow: hidden;
+  margin: 0.5rem;
+  cursor: pointer;
+  height: 100%;
+  border: none;
+}
+
+.btnImage:hover {
+  opacity: 0.8;
+}
