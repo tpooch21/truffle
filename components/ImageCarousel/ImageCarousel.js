@@ -19,19 +19,20 @@ const imagePaths = [
 const ImageCarousel = () => (
   <IconContext.Provider value={{ className: styles.arrowIcon }}>
     <div className={styles.CarouselContainer}>
-      <button className={styles.arrowBtn}>
+      <button type="button" className={styles.arrowBtn}>
         <IoMdArrowDropleftCircle />
       </button>
       <section className={styles.ImageCarousel}>
         {imagePaths.map((path) => (
           <button
+            type="button"
             className={styles.btnImage}
             style={{ backgroundImage: `url(${path})` }}
             key={path}
           />
         ))}
       </section>
-      <button className={styles.arrowBtn}>
+      <button type="button" className={styles.arrowBtn}>
         <IoMdArrowDroprightCircle />
       </button>
     </div>
