@@ -5,6 +5,7 @@ import Head from "next/head";
 const Layout = ({ children }) => (
   <div className={styles.Layout}>
     <Head>
+      <meta charset="utf-8" />
       <title>Truffle</title>
       <link rel="icon" href="/favicon.ico" />
       <link

@@ -11,4 +11,5 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
+  box-shadow: #bbb 3px 3px;
 }

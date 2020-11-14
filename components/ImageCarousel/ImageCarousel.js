@@ -1,4 +1,7 @@
 import styles from "./ImageCarousel.module.css";
+import { IoMdArrowDroprightCircle } from "react-icons/io";
+import { IoMdArrowDropleftCircle } from "react-icons/io";
+import { IconContext } from "react-icons";
 
 const imagePaths = [
   "/boardImages/beach.jpg",
@@ -14,15 +17,25 @@ const imagePaths = [
 ];
 
 const ImageCarousel = () => (
-  <section className={styles.ImageCarousel}>
-    {imagePaths.map((path) => (
-      <button
-        className={styles.btnImage}
-        style={{ backgroundImage: `url(${path})` }}
-        key={path}
-      />
-    ))}
-  </section>
+  <IconContext.Provider value={{ className: styles.arrowIcon }}>
+    <div className={styles.CarouselContainer}>
+      <button className={styles.arrowBtn}>
+        <IoMdArrowDropleftCircle />
+      </button>
+      <section className={styles.ImageCarousel}>
+        {imagePaths.map((path) => (
+          <button
+            className={styles.btnImage}
+            style={{ backgroundImage: `url(${path})` }}
+            key={path}
+          />
+        ))}
+      </section>
+      <button className={styles.arrowBtn}>
+        <IoMdArrowDroprightCircle />
+      </button>
+    </div>
+  </IconContext.Provider>
 );
 
 export default ImageCarousel;
