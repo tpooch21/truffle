@@ -8,7 +8,7 @@ import AddItemForm from "../../components/AddItemForms/AddItemForm";
 import fire from "../../firebaseConfig";
 import { formatJSON } from "../../helpers/formatFirebaseData";
 import { getGroupDataById } from "../../helpers/firebaseQueries.js";
-import  { mutate } from 'swr';
+import { mutate } from "swr";
 
 const BoardsContainer = ({ currentGroupId = null }) => {
   // Modal display state
@@ -22,13 +22,12 @@ const BoardsContainer = ({ currentGroupId = null }) => {
   const toggleModalDisplay = (key, name) => {
     /* If a group key is being passed as an arg, then the function was called from the 'Add Board' handler. modalForBoard should be set to true */
     const isBoardModal = key !== undefined;
-    debugger;
 
     // If modal is being closed (meaning displayModal is true), no need to determine whether a board or group modal should be displayed next
     if (!displayModal) toggleModalForBoard(isBoardModal);
 
     toggleDisplayModal(!displayModal);
-    if (key) updateModalGroup({key, name});
+    if (key) updateModalGroup({ key, name });
   };
 
   const handleUserInput = (e) => {
@@ -47,55 +46,54 @@ const BoardsContainer = ({ currentGroupId = null }) => {
     const boardData = {
       name: userInput,
       groupId: modalGroup.key,
-      groupName: modalGroup.name
+      groupName: modalGroup.name,
     };
-    fetch('http://localhost:3000/api/boards', {
-      method: 'POST',
+    fetch("http://localhost:3000/api/boards", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(boardData)
+      body: JSON.stringify(boardData),
     })
-    .then(res => res.json())
-    .then(data => {
-      debugger;
-      const patchBody = {
-        boardId: data.boardKey,
-        boardName: userInput,
-      };
-      fetch(`http://localhost:3000/api/group/${modalGroup.key}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(patchBody)
-      })
-      .then((res) => {
-        console.log('Board added!');
-        toggleDisplayModal(false);
-        updateUserInput('');
-        mutate('http://localhost:3000/api/groups');
-      })
-      .catch(err => console.log('Error creating new board in firebase'))
-    });
-
+      .then((res) => res.json())
+      .then((data) => {
+        debugger;
+        const patchBody = {
+          boardId: data.boardKey,
+          boardName: userInput,
+        };
+        fetch(`http://localhost:3000/api/group/${modalGroup.key}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(patchBody),
+        })
+          .then((res) => {
+            console.log("Board added!");
+            toggleDisplayModal(false);
+            updateUserInput("");
+            mutate("http://localhost:3000/api/groups");
+          })
+          .catch((err) => console.log("Error creating new board in firebase"));
+      });
   };
 
   const handleAddGroup = () => {
-    const postData = { name: userInput }
-    fetch('http://localhost:3000/api/groups', {
-      method: 'POST',
+    const postData = { name: userInput };
+    fetch("http://localhost:3000/api/groups", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(postData)
+      body: JSON.stringify(postData),
     })
-    .then(() => {
-      toggleDisplayModal(false);
-      updateUserInput('');
-      mutate('http://localhost:3000/api/groups');
-    })
-    .catch(err => console.log(err));
+      .then(() => {
+        toggleDisplayModal(false);
+        updateUserInput("");
+        mutate("http://localhost:3000/api/groups");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -111,10 +109,7 @@ const BoardsContainer = ({ currentGroupId = null }) => {
       />
       <div className={styles.BoardsContainer}>
         <GroupList open={() => toggleModalDisplay()} />
-        <BoardList
-          currentGroupId={currentGroupId}
-          open={toggleModalDisplay}
-        />
+        <BoardList currentGroupId={currentGroupId} open={toggleModalDisplay} />
       </div>
     </>
   );

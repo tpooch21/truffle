@@ -1,42 +1,34 @@
 import styles from "./ImageCarousel.module.css";
+
+import dynamic from "next/dynamic";
+import { imagePaths } from "./CarouselBuild";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { IoMdArrowDropleftCircle } from "react-icons/io";
 import { IconContext } from "react-icons";
+import Carousel from "react-bootstrap/Carousel";
 
-const imagePaths = [
-  "/boardImages/beach.jpg",
-  "/boardImages/canyon.jpg",
-  "/boardImages/cinqueterre.jpg",
-  "/boardImages/florence.jpg",
-  "/boardImages/forest.jpg",
-  "/boardImages/halfdome.jpg",
-  "/boardImages/lake.jpg",
-  "/boardImages/mountain.jpg",
-  "/boardImages/northernlights.jpg",
-  "/boardImages/rainbowsky.jpg",
-];
+const ImageCarousel = () => {
+  return (
+    <IconContext.Provider value={{ className: styles.arrowIcon }}>
+      <div className={styles.CarouselContainer}>
+        {/* <button type="button" className={styles.arrowBtn}>
+          <IoMdArrowDropleftCircle />
+        </button> */}
 
-const ImageCarousel = () => (
-  <IconContext.Provider value={{ className: styles.arrowIcon }}>
-    <div className={styles.CarouselContainer}>
-      <button type="button" className={styles.arrowBtn}>
-        <IoMdArrowDropleftCircle />
-      </button>
-      <section className={styles.ImageCarousel}>
-        {imagePaths.map((path) => (
-          <button
-            type="button"
-            className={styles.btnImage}
-            style={{ backgroundImage: `url(${path})` }}
-            key={path}
-          />
-        ))}
-      </section>
-      <button type="button" className={styles.arrowBtn}>
-        <IoMdArrowDroprightCircle />
-      </button>
-    </div>
-  </IconContext.Provider>
-);
+        <Carousel>
+          {imagePaths.map((path) => (
+            <Carousel.Item>
+              <img className={styles.btnImage} src={path} key={path} />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+
+        {/* <button type="button" className={styles.arrowBtn}>
+          <IoMdArrowDroprightCircle />
+        </button> */}
+      </div>
+    </IconContext.Provider>
+  );
+};
 
 export default ImageCarousel;
