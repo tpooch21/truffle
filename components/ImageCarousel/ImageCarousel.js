@@ -1,31 +1,24 @@
+import { useState } from "react";
 import styles from "./ImageCarousel.module.css";
-
-import dynamic from "next/dynamic";
-import { imagePaths } from "./CarouselBuild";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { IoMdArrowDropleftCircle } from "react-icons/io";
 import { IconContext } from "react-icons";
-import Carousel from "react-bootstrap/Carousel";
+
+import ImageLayout from "./ImageLayout";
 
 const ImageCarousel = () => {
+  const [currentSlide, toggleSlide] = useState(0);
+
   return (
     <IconContext.Provider value={{ className: styles.arrowIcon }}>
       <div className={styles.CarouselContainer}>
-        {/* <button type="button" className={styles.arrowBtn}>
+        <button type="button" className={styles.arrowBtn}>
           <IoMdArrowDropleftCircle />
-        </button> */}
-
-        <Carousel>
-          {imagePaths.map((path) => (
-            <Carousel.Item>
-              <img className={styles.btnImage} src={path} key={path} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-
-        {/* <button type="button" className={styles.arrowBtn}>
+        </button>
+        <ImageLayout current={currentSlide} />
+        <button type="button" className={styles.arrowBtn}>
           <IoMdArrowDroprightCircle />
-        </button> */}
+        </button>
       </div>
     </IconContext.Provider>
   );

@@ -38,6 +38,16 @@
   opacity: 0.8;
 }
 
+.ImageChunk {
+  display: flex;
+  width: 85%;
+  height: 4.5rem;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .arrowBtn {
   background: hsla(0, 0%, 100%, 0);
   border: none;
