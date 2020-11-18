@@ -1,7 +1,7 @@
 import BoardItem from "../BoardItem/BoardItem";
 import styles from "./BoardGroup.module.css";
 import AddBoardItem from "../BoardItem/AddBoardItem";
-import BoardGroupHeader from './BoardGroupHeader';
+import BoardGroupHeader from "./BoardGroupHeader";
 
 const BoardGroup = ({ groupName, boards, open, id }) => {
   const boardsList = boards
@@ -19,8 +19,8 @@ const BoardGroup = ({ groupName, boards, open, id }) => {
       <hr />
       <section className={styles.BoardGroup__grid}>
         {boardsList &&
-          boardsList.map(({ name, key }) => (
-            <BoardItem key={key} title={name} id={key} />
+          boardsList.map(({ name, img, key }) => (
+            <BoardItem key={key} img={img} title={name} id={key} />
           ))}
         <AddBoardItem add={open} />
       </section>

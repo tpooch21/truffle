@@ -20,7 +20,7 @@ const imagePaths2 = [
 
 const imagePaths3 = ["/boardImages/rainbowsky.jpg"];
 
-const ImageLayout = ({ currentSlide, selectedImage, select }) => {
+const ImageLayout = ({ currentSlide, currentImg, select }) => {
   let imagesToShow;
   if (currentSlide === 0) imagesToShow = imagePaths0;
   else if (currentSlide === 1) imagesToShow = imagePaths1;
@@ -31,7 +31,7 @@ const ImageLayout = ({ currentSlide, selectedImage, select }) => {
     <section className={styles.ImageChunk}>
       {imagesToShow.map((path) => {
         const imageClasses = [styles.imgOption];
-        if (path === selectedImage) imageClasses.push(styles.selected);
+        if (path === currentImg) imageClasses.push(styles.selected);
         return (
           <img
             src={path}

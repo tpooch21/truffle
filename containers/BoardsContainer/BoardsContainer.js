@@ -35,18 +35,19 @@ const BoardsContainer = ({ currentGroupId = null }) => {
   };
 
   // delegates duties to the appropriate handler, based on whether a board or group is being added
-  const handleSubmit = (e, isBoard) => {
+  const handleSubmit = (e, isBoard, imgPath) => {
     e.preventDefault();
-    if (isBoard) handleAddBoard();
+    if (isBoard) handleAddBoard(imgPath);
     else handleAddGroup();
   };
 
-  const handleAddBoard = () => {
+  const handleAddBoard = (img) => {
     // Create new board in firebase under boards collection
     const boardData = {
       name: userInput,
       groupId: modalGroup.key,
       groupName: modalGroup.name,
+      img: img,
     };
     fetch("http://localhost:3000/api/boards", {
       method: "POST",
@@ -57,10 +58,10 @@ const BoardsContainer = ({ currentGroupId = null }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        debugger;
         const patchBody = {
           boardId: data.boardKey,
           boardName: userInput,
+          img: img,
         };
         fetch(`http://localhost:3000/api/group/${modalGroup.key}`, {
           method: "POST",
@@ -75,7 +76,7 @@ const BoardsContainer = ({ currentGroupId = null }) => {
             updateUserInput("");
             mutate("http://localhost:3000/api/groups");
           })
-          .catch((err) => console.log("Error creating new board in firebase"));
+          .catch((err) => console.log(err.message));
       });
   };
 

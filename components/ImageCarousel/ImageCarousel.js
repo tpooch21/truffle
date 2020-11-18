@@ -6,9 +6,8 @@ import { IconContext } from "react-icons";
 
 import ImageLayout from "./ImageLayout";
 
-const ImageCarousel = () => {
+const ImageCarousel = ({ currentImg, selectImage }) => {
   const [currentSlide, toggleSlide] = useState(0);
-  const [selectedImage, updateSelectedImage] = useState("");
 
   const changeSlide = (next) => {
     if (next) {
@@ -16,10 +15,6 @@ const ImageCarousel = () => {
     } else {
       toggleSlide(currentSlide - 1);
     }
-  };
-
-  const handleSelectImage = (path) => {
-    updateSelectedImage(path);
   };
 
   return (
@@ -39,8 +34,8 @@ const ImageCarousel = () => {
           </button>
           <ImageLayout
             currentSlide={currentSlide}
-            selectedImage={selectedImage}
-            select={handleSelectImage}
+            currentImg={currentImg}
+            select={selectImage}
           />
           <button
             onClick={() => changeSlide(true)}
