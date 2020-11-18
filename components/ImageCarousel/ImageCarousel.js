@@ -9,14 +9,32 @@ import ImageLayout from "./ImageLayout";
 const ImageCarousel = () => {
   const [currentSlide, toggleSlide] = useState(0);
 
+  const changeSlide = (next) => {
+    if (next) {
+      toggleSlide(currentSlide + 1);
+    } else {
+      toggleSlide(currentSlide - 1);
+    }
+  };
+
   return (
     <IconContext.Provider value={{ className: styles.arrowIcon }}>
       <div className={styles.CarouselContainer}>
-        <button type="button" className={styles.arrowBtn}>
+        <button
+          onClick={() => changeSlide(false)}
+          type="button"
+          className={styles.arrowBtn}
+          disabled={currentSlide === 0}
+        >
           <IoMdArrowDropleftCircle />
         </button>
         <ImageLayout current={currentSlide} />
-        <button type="button" className={styles.arrowBtn}>
+        <button
+          onClick={() => changeSlide(true)}
+          type="button"
+          className={styles.arrowBtn}
+          disabled={currentSlide === 3}
+        >
           <IoMdArrowDroprightCircle />
         </button>
       </div>
