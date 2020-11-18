@@ -19,25 +19,30 @@ const ImageCarousel = () => {
 
   return (
     <IconContext.Provider value={{ className: styles.arrowIcon }}>
-      <div className={styles.CarouselContainer}>
-        <button
-          onClick={() => changeSlide(false)}
-          type="button"
-          className={styles.arrowBtn}
-          disabled={currentSlide === 0}
-        >
-          <IoMdArrowDropleftCircle />
-        </button>
-        <ImageLayout current={currentSlide} />
-        <button
-          onClick={() => changeSlide(true)}
-          type="button"
-          className={styles.arrowBtn}
-          disabled={currentSlide === 3}
-        >
-          <IoMdArrowDroprightCircle />
-        </button>
-      </div>
+      <section className={styles.ImageCarousel}>
+        <label className="input-label" style={{ width: "85%" }}>
+          Choose a Background Image for Your Board:
+        </label>
+        <div className={styles.CarouselContainer}>
+          <button
+            onClick={() => changeSlide(false)}
+            type="button"
+            className={styles.arrowBtn}
+            disabled={currentSlide === 0}
+          >
+            <IoMdArrowDropleftCircle />
+          </button>
+          <ImageLayout current={currentSlide} />
+          <button
+            onClick={() => changeSlide(true)}
+            type="button"
+            className={styles.arrowBtn}
+            disabled={currentSlide === 3}
+          >
+            <IoMdArrowDroprightCircle />
+          </button>
+        </div>
+      </section>
     </IconContext.Provider>
   );
 };

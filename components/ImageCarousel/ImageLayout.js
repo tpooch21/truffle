@@ -30,7 +30,12 @@ const ImageLayout = ({ current }) => {
   return (
     <section className={styles.ImageChunk}>
       {imagesToShow.map((path) => (
-        <img src={path} key={path} className={styles.imgOption} />
+        <img
+          src={path}
+          key={path}
+          className={styles.imgOption}
+          alt="nature-background"
+        />
       ))}
     </section>
   );

@@ -1,4 +1,4 @@
-.GenericForm {
+.generic-form {
   width: 36rem;
   background: var(--main-gray);
   box-shadow: 2px 2px #bbb;
@@ -11,25 +11,25 @@
   align-items: center;
 }
 
-.GenericForm h3 {
+.generic-form h3 {
   color: var(--main-purple);
 }
 
-.formBody {
+.form-body {
   display: flex;
   flex-flow: column;
   width: 85%;
 }
 
-.inputLabel {
+.input-label {
   font-size: 14px;
   font-weight: 700;
   width: 50%;
   margin: 20px auto 0;
 }
 
-.textInput,
-.textInput {
+.text-input,
+.text-input {
   width: 50%;
   height: 30px;
   margin: 10px auto;
@@ -53,7 +53,7 @@
   background: var(--main-purple-light);
 }
 
-.signUp {
+.signup {
   width: 25%;
   display: flex;
   flex-flow: row;
