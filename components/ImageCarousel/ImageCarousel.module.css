@@ -16,8 +16,8 @@
 }
 
 .imgOption {
-  width: 33%;
-  margin-right: 2%;
+  width: 32%;
+  margin-right: 1.5%;
   cursor: pointer;
   height: 100%;
   border: none;
@@ -64,4 +64,8 @@
 
 .arrowIcon:hover {
   color: var(--main-purple-light);
+}
+
+.selected {
+  border: 2px solid var(--main-purple-light);
 }

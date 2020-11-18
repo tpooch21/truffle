@@ -20,23 +20,28 @@ const imagePaths2 = [
 
 const imagePaths3 = ["/boardImages/rainbowsky.jpg"];
 
-const ImageLayout = ({ current }) => {
+const ImageLayout = ({ currentSlide, selectedImage, select }) => {
   let imagesToShow;
-  if (current === 0) imagesToShow = imagePaths0;
-  else if (current === 1) imagesToShow = imagePaths1;
-  else if (current === 2) imagesToShow = imagePaths2;
+  if (currentSlide === 0) imagesToShow = imagePaths0;
+  else if (currentSlide === 1) imagesToShow = imagePaths1;
+  else if (currentSlide === 2) imagesToShow = imagePaths2;
   else imagesToShow = imagePaths3;
 
   return (
     <section className={styles.ImageChunk}>
-      {imagesToShow.map((path) => (
-        <img
-          src={path}
-          key={path}
-          className={styles.imgOption}
-          alt="nature-background"
-        />
-      ))}
+      {imagesToShow.map((path) => {
+        const imageClasses = [styles.imgOption];
+        if (path === selectedImage) imageClasses.push(styles.selected);
+        return (
+          <img
+            src={path}
+            key={path}
+            className={imageClasses.join(" ")}
+            onClick={() => select(path)}
+            alt="nature-background"
+          />
+        );
+      })}
     </section>
   );
 };

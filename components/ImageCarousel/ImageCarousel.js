@@ -8,6 +8,7 @@ import ImageLayout from "./ImageLayout";
 
 const ImageCarousel = () => {
   const [currentSlide, toggleSlide] = useState(0);
+  const [selectedImage, updateSelectedImage] = useState("");
 
   const changeSlide = (next) => {
     if (next) {
@@ -15,6 +16,10 @@ const ImageCarousel = () => {
     } else {
       toggleSlide(currentSlide - 1);
     }
+  };
+
+  const handleSelectImage = (path) => {
+    updateSelectedImage(path);
   };
 
   return (
@@ -32,7 +37,11 @@ const ImageCarousel = () => {
           >
             <IoMdArrowDropleftCircle />
           </button>
-          <ImageLayout current={currentSlide} />
+          <ImageLayout
+            currentSlide={currentSlide}
+            selectedImage={selectedImage}
+            select={handleSelectImage}
+          />
           <button
             onClick={() => changeSlide(true)}
             type="button"
