@@ -71,12 +71,13 @@ const BoardsContainer = ({ currentGroupId = null }) => {
           body: JSON.stringify(patchBody),
         })
           .then((res) => {
-            console.log("Board added!");
             toggleDisplayModal(false);
             updateUserInput("");
             mutate("http://localhost:3000/api/groups");
           })
-          .catch((err) => console.log(err.message));
+          .catch((err) => {
+            console.log(err.message);
+          });
       });
   };
 

@@ -18,7 +18,6 @@ const handler = nc()
   })
   // Update a new board to a group
   .post((req, res) => {
-    console.log("Adding board to group");
     const { id } = req.query;
     const { boardId, boardName, img } = req.body;
     const groupsRef = fire.database().ref(`groups/${id}`).child("boards");
@@ -30,8 +29,8 @@ const handler = nc()
         },
       },
       (err) => {
-        if (err) res.status(501);
-        res.status(201);
+        if (err) res.send(501);
+        else res.send(201);
       }
     );
   });
