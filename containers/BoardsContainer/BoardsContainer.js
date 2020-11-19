@@ -18,6 +18,7 @@ const BoardsContainer = ({ currentGroupId = null }) => {
   const [modalForBoard, toggleModalForBoard] = useState(true);
   const [modalGroup, updateModalGroup] = useState("");
   const [userInput, updateUserInput] = useState("");
+  const [inputError, toggleInputError] = useState(false);
 
   const toggleModalDisplay = (key, name) => {
     /* If a group key is being passed as an arg, then the function was called from the 'Add Board' handler. modalForBoard should be set to true */
@@ -32,13 +33,21 @@ const BoardsContainer = ({ currentGroupId = null }) => {
 
   const handleUserInput = (e) => {
     updateUserInput(e.target.value);
+    if (inputError) toggleInputError(false);
   };
 
   // delegates duties to the appropriate handler, based on whether a board or group is being added
   const handleSubmit = (e, isBoard, imgPath) => {
     e.preventDefault();
-    if (isBoard) handleAddBoard(imgPath);
-    else handleAddGroup();
+    // If user input is empty, throw an input error
+    if (!userInput) {
+      toggleInputError(true);
+      return;
+    }
+
+    if (isBoard) {
+      handleAddBoard(imgPath);
+    } else handleAddGroup();
   };
 
   const handleAddBoard = (img) => {
@@ -108,6 +117,7 @@ const BoardsContainer = ({ currentGroupId = null }) => {
         close={() => toggleModalDisplay(null)}
         addBoard={modalForBoard}
         modalGroupName={modalGroup.name}
+        error={inputError}
       />
       <div className={styles.BoardsContainer}>
         <GroupList open={() => toggleModalDisplay()} />

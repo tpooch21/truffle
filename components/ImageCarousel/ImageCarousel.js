@@ -6,7 +6,7 @@ import { IconContext } from "react-icons";
 
 import ImageLayout from "./ImageLayout";
 
-const ImageCarousel = ({ currentImg, selectImage }) => {
+const ImageCarousel = ({ currentImg, selectImage, imageError }) => {
   const [currentSlide, toggleSlide] = useState(0);
 
   const changeSlide = (next) => {
@@ -46,6 +46,11 @@ const ImageCarousel = ({ currentImg, selectImage }) => {
             <IoMdArrowDroprightCircle />
           </button>
         </div>
+        {imageError && (
+          <p className="invalid-input" style={{ width: "85%" }}>
+            Please select an image for your board
+          </p>
+        )}
       </section>
     </IconContext.Provider>
   );

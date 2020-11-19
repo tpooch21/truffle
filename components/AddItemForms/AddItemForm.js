@@ -9,6 +9,7 @@ const AddItemForm = ({
   close,
   addBoard,
   modalGroupName,
+  error,
 }) => {
   const message = addBoard
     ? `Add Board to ${modalGroupName}`
@@ -25,6 +26,7 @@ const AddItemForm = ({
         onSubmit={onSubmit}
         onUserInput={onUserInput}
         input={input}
+        error={error}
       />
     </Modal>
   );
