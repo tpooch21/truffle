@@ -34,6 +34,13 @@
   font-weight: 500;
 }
 
+.emptyGroup {
+  background: #ddd;
+  color: black;
+  font-weight: 500;
+  height: 2.5rem;
+}
+
 .addGroup:hover {
   background: #ddd;
   opacity: 0.8;

@@ -13,4 +13,8 @@
 
 .GroupList__header {
   font-size: 10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
 }

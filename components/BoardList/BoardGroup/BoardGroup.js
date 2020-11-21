@@ -26,7 +26,7 @@ const BoardGroup = ({ groupName, boards, open, id, loading }) => {
 
   return (
     <section className={styles.BoardGroup}>
-      <BoardGroupHeader groupName={groupName} />
+      <BoardGroupHeader groupName={groupName} loading={loading} />
       <hr />
       <section className={styles.BoardGroup__grid}>
         {boardsList &&

@@ -7,8 +7,6 @@ import useGroups from "../../dataHooks/useGroups";
 const BoardList = ({ currentGroupId, open }) => {
   const { data, isLoading, isError } = useGroups(currentGroupId);
 
-  if (isLoading) return <p>BoardList is Loading...</p>;
-
   // Should be displayed if user hasn't selected a specific group
   const allBoardsHeader = (
     <header className={styles.allBoardsHeader}>
@@ -16,6 +14,8 @@ const BoardList = ({ currentGroupId, open }) => {
     </header>
   );
 
+  // If boards are still being fetched (isLoading is true), signal to BoardGroup that the special 'loading' board group should be rendered
+  // Otherwise, perform the standard operation of mapping over the boards by group, and creating a BoardGroup for each group
   const content = isLoading ? (
     <BoardGroup groupName="Loading" loading={true} />
   ) : data.groups.length > 0 ? (
