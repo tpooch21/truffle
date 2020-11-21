@@ -1,13 +1,13 @@
 import styles from "./BoardList.module.css";
 import BoardGroup from "./BoardGroup/BoardGroup";
-import useGroups from '../../dataHooks/useGroups';
+import useGroups from "../../dataHooks/useGroups";
 /**
  * Render boardList after fetching board data (by group)
  */
 const BoardList = ({ currentGroupId, open }) => {
   const { data, isLoading, isError } = useGroups(currentGroupId);
 
-  if (isLoading) return <p>BoardList is Loading...</p>
+  if (isLoading) return <p>BoardList is Loading...</p>;
 
   // Should be displayed if user hasn't selected a specific group
   const allBoardsHeader = (
@@ -16,22 +16,31 @@ const BoardList = ({ currentGroupId, open }) => {
     </header>
   );
 
+  const content = isLoading ? (
+    <BoardGroup groupName="Loading" loading={true} />
+  ) : data.groups.length > 0 ? (
+    data.groups.map(({ key, name, boards }) => (
+      <BoardGroup
+        key={key}
+        groupName={name}
+        boards={boards}
+        open={() => open(key, name)}
+        id={key}
+      />
+    ))
+  ) : (
+    <>
+      <h2 className={styles.addGroupMessage}>
+        Add a Group to Start Creating Boards!
+      </h2>
+      <hr />
+    </>
+  );
+
   return (
     <div className={styles.BoardList}>
-      {!currentGroupId && allBoardsHeader}
-      {data.groups.length > 0 ? data.groups.map(({ key, name, boards }) => (
-        <BoardGroup
-          key={key}
-          groupName={name}
-          boards={boards}
-          open={() => open(key, name)}
-          id={key}
-        />
-      )) :
-      <>
-        <h2 className={styles.addGroupMessage}>Add a Group to Start Creating Boards!</h2>
-        <hr />
-      </>}
+      {!currentGroupId && !isLoading && allBoardsHeader}
+      {content}
     </div>
   );
 };
