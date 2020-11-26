@@ -18,8 +18,8 @@ const AddItemForm = ({
 
   return (
     <Modal show={show} close={close}>
-      <header>
-        <h2>{message}</h2>
+      <header className="form-header">
+        <h1>{message}</h1>
       </header>
       <AddBoardOrGroup
         item={item}
