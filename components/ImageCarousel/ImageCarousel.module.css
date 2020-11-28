@@ -17,7 +17,7 @@
 
 .imgOption {
   width: 32%;
-  margin-right: 1.5%;
+  margin-right: 0.6rem;
   cursor: pointer;
   height: 100%;
   border: none;
@@ -31,7 +31,7 @@
 .ImageChunk {
   display: flex;
   width: 85%;
-  height: 4.5rem;
+  height: 5.5rem;
   flex-flow: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
@@ -51,14 +51,15 @@
   width: 1.5rem;
   border-radius: 50%;
   position: relative;
+  margin-right: 0.6rem;
 }
 
 .arrowIcon {
   position: absolute;
   top: 0;
   left: 0;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem;
+  width: 2rem;
   color: var(--main-purple);
 }
 
