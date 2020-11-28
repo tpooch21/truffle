@@ -1,11 +1,30 @@
 .HomeContainer {
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
   justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.LoginContainer {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
   align-items: center;
 }
 
-.HomeContainer span {
+.LoginContainer span {
   font-family: "Satisfy", cursive;
   text-shadow: 1px 1px var(--main-purple);
+}
+
+.HomeBackground {
+  position: absolute;
+  width: 50%;
+  top: 0;
+  left: 50%;
+  height: 100vh;
+  background-image: url("/cool-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
