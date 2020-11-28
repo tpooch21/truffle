@@ -3,36 +3,39 @@
   width: 100%;
   top: 0;
   left: 0;
-  height: 50px;
-  background: black;
   color: var(--main-purple-light);
   display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+  flex-flow: column;
+  justify-content: flex-start;
+}
+
+.ToolbarHeader {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
-  padding: 0 7px;
+  width: 100%;
+  padding-left: 10px;
+  background: black;
+}
+
+.ToolbarHeader h1 {
+  font-family: "Satisfy", cursive;
+  font-size: 36px;
+  line-height: 36px;
+  padding: 0 5px;
 }
 
 .TbButtonWrapper {
-  width: 33%;
+  width: 100%;
   display: flex;
   flex-flow: row;
   justify-content: flex-start;
   align-items: center;
-  height: 80%;
-}
-
-.Toolbar h1 {
-  line-height: 100%;
-  padding: 5px 0;
-  width: 33%;
-  text-align: center;
-  font-family: "Satisfy", cursive;
-  font-size: 1.8rem;
+  padding: 5px 10px;
 }
 
 .Toolbar button {
-  height: 100%;
+  height: 35px;
   margin: 0 5px;
   background: hsla(0, 0%, 100%, 0.4);
   z-index: 10;
@@ -52,12 +55,4 @@
 
 .Toolbar a {
   height: 85%;
-}
-
-.logo {
-  width: 33%;
-  height: 80%;
-  text-align: center;
-  color: inherit;
-  border-radius: 5px;
 }

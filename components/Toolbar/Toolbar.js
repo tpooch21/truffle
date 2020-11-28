@@ -3,6 +3,9 @@ import Link from "next/link";
 
 const Toolbar = () => (
   <div className={styles.Toolbar}>
+    <header className={styles.ToolbarHeader}>
+      <h1>Truffle</h1>
+    </header>
     <div className={styles.TbButtonWrapper}>
       <Link href="/">
         <a>
@@ -15,8 +18,6 @@ const Toolbar = () => (
         </a>
       </Link>
     </div>
-    <h1>Truffle</h1>
-    <div className={styles.logo}></div>
   </div>
 );
 
